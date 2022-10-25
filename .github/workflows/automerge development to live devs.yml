@@ -1,50 +1,38 @@
-# This is a basic workflow to help you get started with Actions
-
 name: automerge development to live devs
 
-# Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
     branches: [ "development" ]
   pull_request:
     branches: [ "development" ]
 
-  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
-  build:
-    # The type of runner that the job will run on
+  automerge-core-dev:
+    if: contains(github.event.head_commit.message, 'core_')
     runs-on: ubuntu-latest
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
 
       - name: development to core-dev
-        if: contains(github.event.head_commit.message, 'core_')
-        # You may pin to the exact commit or the version.
         uses: tukasz/direct-merge-action@b7882b0c66df6376596a91f117272c1ba2d5f867
         with:
-          # Name of the source branch (from)
           source-branch: development
-          # Name of the target branch (to)
           target-branch: core-dev
-          # Repository access token. For example: secrets.GITHUB_TOKEN
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+  automerge-m-core-dev:
+    if: contains(github.event.head_commit.message, 'm-core_')
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
       - name: development to m-core-dev
-        if: contains(github.event.head_commit.message, 'm-core_')
-        # You may pin to the exact commit or the version.
         uses: tukasz/direct-merge-action@b7882b0c66df6376596a91f117272c1ba2d5f867
         with:
-          # Name of the source branch (from)
           source-branch: development
-          # Name of the target branch (to)
           target-branch: m-core-dev
-          # Repository access token. For example: secrets.GITHUB_TOKEN
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
