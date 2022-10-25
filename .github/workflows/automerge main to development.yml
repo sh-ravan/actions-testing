@@ -1,4 +1,4 @@
-name: automerge development to live devs
+name: automerge main to development
 
 on:
   push:
