@@ -27,8 +27,7 @@ jobs:
 
       - name: Direct merge
         # You may pin to the exact commit or the version.
-        # uses: tukasz/direct-merge-action@b7882b0c66df6376596a91f117272c1ba2d5f867
-        uses: tukasz/direct-merge-action@v2.0.2
+        uses: tukasz/direct-merge-action@b7882b0c66df6376596a91f117272c1ba2d5f867
         with:
           # Name of the source branch (from)
           source-branch: main
