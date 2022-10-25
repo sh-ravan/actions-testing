@@ -1,5 +1,3 @@
-# This is a basic workflow to help you get started with Actions
-
 name: automerge main to development
 
 # Controls when the workflow will run
@@ -33,7 +31,5 @@ jobs:
           source-branch: main
           # Name of the target branch (to)
           target-branch: development
-          # Message to use for the commit. If empty then a default message will be used ("Automatic merge of <source-branch> -> <target-branch>")
-          commit-message: automerge
           # Repository access token. For example: secrets.GITHUB_TOKEN
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
