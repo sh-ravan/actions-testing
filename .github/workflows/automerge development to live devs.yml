@@ -9,7 +9,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  automerge-core-dev:
+  automerge_core_dev:
     if: "startsWith(github.event.head_commit.message, 'core_')"
     runs-on: ubuntu-latest
 
@@ -23,7 +23,7 @@ jobs:
           target-branch: core-dev
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-  automerge-m-core-dev:
+  automerge_m_core_dev:
     if: "startsWith(github.event.head_commit.message, 'm-core_')"
     runs-on: ubuntu-latest
 
