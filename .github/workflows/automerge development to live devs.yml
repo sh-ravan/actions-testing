@@ -2,15 +2,15 @@ name: automerge development to live devs
 
 on:
   push:
-    branches: [ "development" ]
+    branches: ["development"]
   pull_request:
-    branches: [ "development" ]
+    branches: ["development"]
 
   workflow_dispatch:
 
 jobs:
   automerge-core-dev:
-    if: contains(github.event.head_commit.message, 'core_')
+    if: "startsWith(github.event.head_commit.message, 'core_')"
     runs-on: ubuntu-latest
 
     steps:
@@ -24,7 +24,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   automerge-m-core-dev:
-    if: contains(github.event.head_commit.message, 'm-core_')
+    if: "startsWith(github.event.head_commit.message, 'm-core_')"
     runs-on: ubuntu-latest
 
     steps:
