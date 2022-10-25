@@ -12,7 +12,6 @@ jobs:
   automerge_core_dev:
     if: "startsWith(github.event.head_commit.message, 'core_')"
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v3
 
@@ -26,7 +25,6 @@ jobs:
   automerge_m_core_dev:
     if: "startsWith(github.event.head_commit.message, 'm-core_')"
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v3
 
