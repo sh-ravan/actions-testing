@@ -1,0 +1,22 @@
+name: main to development
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+  workflow_dispatch:
+
+jobs:
+  automerge:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Merge main -> development
+        uses: devmasx/merge-branch@854d3ac71ed1e9deb668e0074781b81fdd6e771f
+        with:
+          type: now
+          from_branch: main
+          target_branch: development
+          github_token: ${{ secrets.GITHUB_TOKEN }}
