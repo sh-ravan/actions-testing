@@ -23,7 +23,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: development to core-dev
-        if: "startsWith(github.event.head_commit.message, 'core_')"
+        if: "startsWith(github.event.head_commit.message, 'core/')"
         uses: tukasz/direct-merge-action@b7882b0c66df6376596a91f117272c1ba2d5f867
         with:
           source-branch: development
@@ -31,7 +31,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: development to m-core-dev
-        if: "startsWith(github.event.head_commit.message, 'm-core_')"
+        if: "startsWith(github.event.head_commit.message, 'm-core/')"
         uses: tukasz/direct-merge-action@b7882b0c66df6376596a91f117272c1ba2d5f867
         with:
           source-branch: development
