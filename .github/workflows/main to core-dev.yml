@@ -1,5 +1,5 @@
 name: main to core-dev
-description: This action is to be run MANUALLY. It merges the main branch into the core-dev branch
+# description: This action is to be run MANUALLY. It merges the main branch into the core-dev branch
 
 on:
   workflow_dispatch:

@@ -1,5 +1,5 @@
 name: main to m-taskmapper-dev
-description: This action is to be run MANUALLY. It merges the main branch into the m-taskmapper-dev branch
+# description: This action is to be run MANUALLY. It merges the main branch into the m-taskmapper-dev branch
 
 on:
   workflow_dispatch:
