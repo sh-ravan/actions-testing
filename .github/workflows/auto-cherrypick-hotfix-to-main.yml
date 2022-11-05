@@ -1,1 +1,36 @@
 name: AUTO - cherry-pick production hotfix to main
+
+on:
+  workflow_dispatch:
+    inputs:
+      core:
+        type: boolean
+        description: Merge main into core-dev
+        default: true
+      m_core:
+        type: boolean
+        description: Merge main into m-core-dev
+        default: true
+      taskmapper:
+        type: boolean
+        description: Merge main into taskmapper-dev
+        default: true
+      m_taskmapper:
+        type: boolean
+        description: Merge main into m-taskmapper-dev
+        default: true
+
+jobs:
+  automerge:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: merge main to core-dev
+        if: ${{ github.event.inputs.core == 'true' }}
+        uses: tukasz/direct-merge-action@b7882b0c66df6376596a91f117272c1ba2d5f867
+        with:
+          source-branch: main
+          target-branch: core-dev
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
