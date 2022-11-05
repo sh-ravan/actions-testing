@@ -1,0 +1,36 @@
+name: [MANUAL] production to RIL live production branches
+
+on:
+  workflow_dispatch:
+    inputs:
+      core:
+        type: boolean
+        description: Merge core-production into ril-core-production
+        default: true
+      m_core:
+        type: boolean
+        description: Merge m-core-production into ril-m-core-production
+        default: true
+
+jobs:
+  automerge:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: merge core-production to ril-core-production
+        if: ${{ github.event.inputs.core == 'true' }}
+        uses: tukasz/direct-merge-action@b7882b0c66df6376596a91f117272c1ba2d5f867
+        with:
+          source-branch: core-production
+          target-branch: ril-core-production
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: merge m-core-production to ril-m-core-production
+        if: ${{ github.event.inputs.m_core == 'true' }}
+        uses: tukasz/direct-merge-action@b7882b0c66df6376596a91f117272c1ba2d5f867
+        with:
+          source-branch: m-core-production
+          target-branch: ril-m-core-production
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

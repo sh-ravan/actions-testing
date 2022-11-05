@@ -1,0 +1,60 @@
+name: [MANUAL] production to live production branches
+
+on:
+  workflow_dispatch:
+    inputs:
+      core:
+        type: boolean
+        description: Merge production into core-production
+        default: true
+      m_core:
+        type: boolean
+        description: Merge production into m-core-production
+        default: true
+      taskmapper:
+        type: boolean
+        description: Merge production into taskmapper-production
+        default: true
+      m_taskmapper:
+        type: boolean
+        description: Merge production into m-taskmapper-production
+        default: true
+
+jobs:
+  automerge:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: merge production to core-production
+        if: ${{ github.event.inputs.core == 'true' }}
+        uses: tukasz/direct-merge-action@b7882b0c66df6376596a91f117272c1ba2d5f867
+        with:
+          source-branch: production
+          target-branch: core-production
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: merge production to m-core-production
+        if: ${{ github.event.inputs.m_core == 'true' }}
+        uses: tukasz/direct-merge-action@b7882b0c66df6376596a91f117272c1ba2d5f867
+        with:
+          source-branch: production
+          target-branch: m-core-production
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: merge production to taskmapper-production
+        if: ${{ github.event.inputs.taskmapper == 'true' }}
+        uses: tukasz/direct-merge-action@b7882b0c66df6376596a91f117272c1ba2d5f867
+        with:
+          source-branch: production
+          target-branch: taskmapper-production
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: merge production to m-taskmapper-production
+        if: ${{ github.event.inputs.m_taskmapper == 'true' }}
+        uses: tukasz/direct-merge-action@b7882b0c66df6376596a91f117272c1ba2d5f867
+        with:
+          source-branch: production
+          target-branch: m-taskmapper-production
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -1,0 +1,14 @@
+name: [AUTOMATIC] cherrypick production hotfix to main
+
+on:
+  push:
+    branches: ["production"]
+
+  workflow_dispatch:
+
+jobs:
+  automerge:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3

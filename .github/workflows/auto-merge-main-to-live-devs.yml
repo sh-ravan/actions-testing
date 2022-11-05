@@ -1,10 +1,7 @@
-name: automerge main to development
-# description: This action is run AUTOMATICALLY as soon as PRs/pushes are made to main. But it can be run MANUALLY also. It merges the latest commit on main branch into the respective live dev branch if the commit message contains core/ m-core/ tm/ or m-tm/
+name: [AUTOMATIC] main to development
 
 on:
   push:
-    branches: ["main"]
-  pull_request:
     branches: ["main"]
 
   workflow_dispatch:
