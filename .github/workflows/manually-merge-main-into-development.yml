@@ -1,4 +1,4 @@
-name: [MANUAL] main to development
+name: MANUAL - main to development
 
 on:
   workflow_dispatch:

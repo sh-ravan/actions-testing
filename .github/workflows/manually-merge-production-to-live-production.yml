@@ -1,4 +1,4 @@
-name: [MANUAL] production to live production branches
+name: MANUAL - production to live production branches
 
 on:
   workflow_dispatch:

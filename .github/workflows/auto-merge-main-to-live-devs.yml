@@ -1,4 +1,4 @@
-name: [AUTOMATIC] main to development
+name: AUTOMATIC - main to development
 
 on:
   push:
