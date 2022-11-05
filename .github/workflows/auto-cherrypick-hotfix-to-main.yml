@@ -1,4 +1,4 @@
-name: [AUTOMATIC] cherrypick production hotfix to main
+name: AUTOMATIC - cherrypick production hotfix to main
 
 on:
   push:
