@@ -1,4 +1,4 @@
-name: MANUAL - production to RIL live production
+name: MANUAL - production to RIL production
 
 on:
   workflow_dispatch:

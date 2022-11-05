@@ -1,4 +1,4 @@
-name: AUTO - cherry-pick production hotfix to main
+name: AUTO - cherry-pick hotfix into main
 
 on:
   workflow_dispatch:
