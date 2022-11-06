@@ -1,24 +1,9 @@
 name: AUTO - cherry-pick hotfix into main
 
 on:
+  push:
+    branches: ["pre-production"]
   workflow_dispatch:
-    inputs:
-      core:
-        type: boolean
-        description: Merge main into core-dev
-        default: true
-      m_core:
-        type: boolean
-        description: Merge main into m-core-dev
-        default: true
-      taskmapper:
-        type: boolean
-        description: Merge main into taskmapper-dev
-        default: true
-      m_taskmapper:
-        type: boolean
-        description: Merge main into m-taskmapper-dev
-        default: true
 
 jobs:
   automerge:
@@ -27,10 +12,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: merge main to core-dev
-        if: ${{ github.event.inputs.core == 'true' }}
-        uses: tukasz/direct-merge-action@b7882b0c66df6376596a91f117272c1ba2d5f867
+      - name: cherry-pick to main
+        if: startsWith(github.event.head_commit.message, 'hotfix:')
+        uses: carloscastrojumo/github-cherry-pick-action@bb0869df47c27be4ae4c7a2d93d22827aa5a0054
         with:
-          source-branch: main
-          target-branch: core-dev
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          branch: main
+          token: ${{ secrets.GITHUB_TOKEN }}
