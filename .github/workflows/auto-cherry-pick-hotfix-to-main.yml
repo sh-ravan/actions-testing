@@ -1,8 +1,8 @@
-name: AUTO - get hotfix in main
+name: AUTO - Merge Staging into Main upon Hotfix
 
 on:
   push:
-    branches: ["pre-production"]
+    branches: ["staging"]
   workflow_dispatch:
 
 jobs:
@@ -16,6 +16,6 @@ jobs:
         if: startsWith(github.event.head_commit.message, 'hotfix:')
         uses: tukasz/direct-merge-action@b7882b0c66df6376596a91f117272c1ba2d5f867
         with:
-          source-branch: pre-production
+          source-branch: staging
           target-branch: main
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
