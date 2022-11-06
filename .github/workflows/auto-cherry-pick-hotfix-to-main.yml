@@ -1,4 +1,4 @@
-name: AUTO - cherry-pick hotfix into main
+name: AUTO - get hotfix in main
 
 on:
   push:
@@ -12,9 +12,10 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: cherry-pick to main
+      - name: merge to main
         if: startsWith(github.event.head_commit.message, 'hotfix:')
-        uses: carloscastrojumo/github-cherry-pick-action@bb0869df47c27be4ae4c7a2d93d22827aa5a0054
+        uses: tukasz/direct-merge-action@b7882b0c66df6376596a91f117272c1ba2d5f867
         with:
-          branch: main
-          token: ${{ secrets.GITHUB_TOKEN }}
+          source-branch: pre-production
+          target-branch: main
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
