@@ -1,23 +1,23 @@
-name: MANUAL - pre-production to production
+name: MANUAL - Staging to Production
 
 on:
   workflow_dispatch:
     inputs:
       core:
         type: boolean
-        description: pre-production --> core-production
+        description: staging --> core-prod
         default: true
       m_core:
         type: boolean
-        description: pre-production --> m-core-production
+        description: staging --> m-core-prod
         default: true
       taskmapper:
         type: boolean
-        description: pre-production --> taskmapper-production
+        description: staging --> taskmapper-prod
         default: true
       m_taskmapper:
         type: boolean
-        description: pre-production --> m-taskmapper-production
+        description: staging --> m-taskmapper-prod
         default: true
 
 jobs:
@@ -35,36 +35,36 @@ jobs:
       - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
       - run: echo "🚀 The workflow is now ready to start."
 
-      - name: merge pre-production to core-production
+      - name: merge staging to core-prod
         if: ${{ github.event.inputs.core == 'true' }}
         uses: tukasz/direct-merge-action@b7882b0c66df6376596a91f117272c1ba2d5f867
         with:
-          source-branch: pre-production
-          target-branch: core-production
+          source-branch: staging
+          target-branch: core-prod
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: merge pre-production to m-core-production
+      - name: merge staging to m-core-prod
         if: ${{ github.event.inputs.m_core == 'true' }}
         uses: tukasz/direct-merge-action@b7882b0c66df6376596a91f117272c1ba2d5f867
         with:
-          source-branch: pre-production
-          target-branch: m-core-production
+          source-branch: staging
+          target-branch: m-core-prod
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: merge pre-production to taskmapper-production
+      - name: merge staging to taskmapper-prod
         if: ${{ github.event.inputs.taskmapper == 'true' }}
         uses: tukasz/direct-merge-action@b7882b0c66df6376596a91f117272c1ba2d5f867
         with:
-          source-branch: pre-production
-          target-branch: taskmapper-production
+          source-branch: staging
+          target-branch: taskmapper-prod
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: merge pre-production to m-taskmapper-production
+      - name: merge staging to m-taskmapper-prod
         if: ${{ github.event.inputs.m_taskmapper == 'true' }}
         uses: tukasz/direct-merge-action@b7882b0c66df6376596a91f117272c1ba2d5f867
         with:
-          source-branch: pre-production
-          target-branch: m-taskmapper-production
+          source-branch: staging
+          target-branch: m-taskmapper-prod
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - run: echo "🍏 This job's status is ${{ job.status }}."
