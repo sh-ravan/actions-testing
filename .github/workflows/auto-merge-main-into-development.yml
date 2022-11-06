@@ -1,4 +1,4 @@
-name: AUTO - Main to Development
+name: AUTO - Merge Main into Development
 
 on:
   push:
