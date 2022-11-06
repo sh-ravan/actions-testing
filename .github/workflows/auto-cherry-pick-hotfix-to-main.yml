@@ -1,4 +1,4 @@
-name: AUTO - Merge Staging into Main on Hotfix
+name: AUTO - Merge Staging into Main upon Hotfix
 
 on:
   push:
