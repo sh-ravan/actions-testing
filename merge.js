@@ -62,12 +62,12 @@ async function merge() {
         break;
 
       case 409:
-        setFailed(`Merge conflict. ${res.data?.message || ""}`);
+        setFailed(`Merge conflict! ${res.data?.message || ""}`);
 
         break;
 
       case 404:
-        setFailed(`Branch not found. ${res.data?.message || ""}`);
+        setFailed(`Branch not found! ${res.data?.message || ""}`);
 
         break;
 
