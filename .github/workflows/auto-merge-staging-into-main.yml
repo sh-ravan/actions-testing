@@ -1,0 +1,31 @@
+name: AUTO - Merge Staging into Main After Hotfix
+
+on:
+  push:
+    branches: ["staging"]
+  workflow_dispatch:
+
+jobs:
+  automerge:
+    runs-on: ubuntu-latest
+
+    steps:
+      - run: echo "⚡ This automerge job was triggered by a ${{ github.event_name }} event."
+      - run: echo "🐧 Running job on a ${{ runner.os }} server hosted by GitHub"
+      - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
+
+      - name: Check out repository code
+        uses: actions/checkout@v3
+
+      - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
+      - run: echo "🚀 The workflow is now ready to start."
+
+      - name: merge to main
+        if: startsWith(github.event.head_commit.message, 'hotfix:')
+        uses: tukasz/direct-merge-action@b7882b0c66df6376596a91f117272c1ba2d5f867
+        with:
+          source-branch: staging
+          target-branch: main
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - run: echo "🍏 This job's status is ${{ job.status }}."
