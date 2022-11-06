@@ -11,7 +11,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - run: echo "⚡ This automerge job was triggered by a ${{ github.event_name }} event."
+      - run: echo "🐧 Running job on a ${{ runner.os }} server hosted by GitHub"
+      - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
+
+      - name: Check out repository code
+        uses: actions/checkout@v3
+
+      - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
+      - run: echo "🚀 The workflow is now ready to start."
 
       - name: main to core-dev
         if: "contains(github.event.head_commit.message, 'core/')"
@@ -44,3 +52,5 @@ jobs:
           source-branch: main
           target-branch: m-taskmapper-dev
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      
+      - run: echo "🍏 This job's status is ${{ job.status }}."

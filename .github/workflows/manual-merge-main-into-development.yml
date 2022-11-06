@@ -5,19 +5,19 @@ on:
     inputs:
       core:
         type: boolean
-        description: Merge main into core-dev
+        description: main --> core-dev
         default: true
       m_core:
         type: boolean
-        description: Merge main into m-core-dev
+        description: main --> m-core-dev
         default: true
       taskmapper:
         type: boolean
-        description: Merge main into taskmapper-dev
+        description: main --> taskmapper-dev
         default: true
       m_taskmapper:
         type: boolean
-        description: Merge main into m-taskmapper-dev
+        description: main --> m-taskmapper-dev
         default: true
 
 jobs:
@@ -25,9 +25,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - run: echo "⚡ This merge job was manually triggered by ${{ github.actor }}."
+      - run: echo "🐧 Running job on a ${{ runner.os }} server hosted by GitHub"
+      - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
 
-      - name: merge main to core-dev
+      - name: Check out repository code
+        uses: actions/checkout@v3
+
+      - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
+      - run: echo "🚀 The workflow is now ready to start."
+
+      - name: Merge main into core-dev
         if: ${{ github.event.inputs.core == 'true' }}
         uses: tukasz/direct-merge-action@b7882b0c66df6376596a91f117272c1ba2d5f867
         with:
@@ -35,7 +43,7 @@ jobs:
           target-branch: core-dev
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: merge main to m-core-dev
+      - name: Merge main into m-core-dev
         if: ${{ github.event.inputs.m_core == 'true' }}
         uses: tukasz/direct-merge-action@b7882b0c66df6376596a91f117272c1ba2d5f867
         with:
@@ -43,7 +51,7 @@ jobs:
           target-branch: m-core-dev
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: merge main to taskmapper-dev
+      - name: Merge main into taskmapper-dev
         if: ${{ github.event.inputs.taskmapper == 'true' }}
         uses: tukasz/direct-merge-action@b7882b0c66df6376596a91f117272c1ba2d5f867
         with:
@@ -51,10 +59,12 @@ jobs:
           target-branch: taskmapper-dev
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: merge main to m-taskmapper-dev
+      - name: Merge main into m-taskmapper-dev
         if: ${{ github.event.inputs.m_taskmapper == 'true' }}
         uses: tukasz/direct-merge-action@b7882b0c66df6376596a91f117272c1ba2d5f867
         with:
           source-branch: main
           target-branch: m-taskmapper-dev
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - run: echo "🍏 This job's status is ${{ job.status }}."
