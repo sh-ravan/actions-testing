@@ -2,6 +2,7 @@ name: MANUAL - Staging to Production
 
 on:
   workflow_dispatch:
+    branches: ["staging"]
     inputs:
       core:
         type: boolean
