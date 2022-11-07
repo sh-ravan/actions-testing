@@ -1,4 +1,4 @@
-name: AUTO - Hotfixes and Cherries
+name: AUTOMATIC - Hotfixes and Cherries
 
 on:
   push:
