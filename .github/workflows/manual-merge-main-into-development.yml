@@ -2,7 +2,7 @@ name: MANUAL - Main to Development
 
 on:
   schedule:
-    - cron: '30 18 * * *'
+    - cron: "30 18 * * *"
   workflow_dispatch:
     inputs:
       core:
@@ -34,7 +34,7 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v3
 
-      - run: echo "⏬ The ${{ github.repository }} repository has been cloned to the runner."
+      - run: echo "🐑 The ${{ github.repository }} repository has been cloned to the runner."
       - run: echo "🚀 The workflow is now ready to start."
 
       - name: Merge main into core-dev
