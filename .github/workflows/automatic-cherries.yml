@@ -1,4 +1,4 @@
-name: AUTOMATIC - Hotfixes and Cherries
+name: AUTOMATIC - Cherries
 
 on:
   push:
@@ -21,11 +21,11 @@ jobs:
       - run: echo "🚀 The workflow is now ready to start."
 
       - name: merge to main
-        if: startsWith(github.event.head_commit.message, 'hotfix:') || startsWith(github.event.head_commit.message, 'cherry:')
+        if: startsWith(github.event.head_commit.message, 'cherry:')
         uses: tukasz/direct-merge-action@b7882b0c66df6376596a91f117272c1ba2d5f867
         with:
           source-branch: staging
           target-branch: main
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - run: echo "⏹ .End of job. Status - ${{ job.status }}."
+      - run: echo "⏹ End of job. Status - ${{ job.status }}."
