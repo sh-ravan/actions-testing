@@ -25,4 +25,4 @@ jobs:
           target-branch: staging
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - run: echo "⏹ End of job. Status: ${{ job.status }}."
+      - run: echo "⏹ .End of job. Status - ${{ job.status }}."
