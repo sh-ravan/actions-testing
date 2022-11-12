@@ -18,13 +18,13 @@ jobs:
 
     steps:
       - run: echo "⚡ This merge job was manually triggered by ${{ github.actor }}."
-      - run: echo "🐧 Running job on a ${{ runner.os }} server hosted by GitHub"
+      - run: echo "🐧 Running job on a ${{ runner.os }} server."
       - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
 
       - name: Check out repository code
         uses: actions/checkout@v3
 
-      - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
+      - run: echo "⏬ The ${{ github.repository }} repository has been cloned to the runner."
       - run: echo "🚀 The workflow is now ready to start."
 
       - name: merge core-prod to ril-core-prod
@@ -43,4 +43,4 @@ jobs:
           target-branch: ril-m-core-prod
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - run: echo "🍏 This job's status is ${{ job.status }}."
+      - run: echo "⏹ End of job. Status - ${{ job.status }}."
