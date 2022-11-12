@@ -1,6 +1,8 @@
 name: MANUAL - Main to Development
 
 on:
+  schedule:
+    - cron: '30 18 * * *'
   workflow_dispatch:
     inputs:
       core:
