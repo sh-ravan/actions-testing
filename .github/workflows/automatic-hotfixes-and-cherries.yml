@@ -28,4 +28,4 @@ jobs:
           target-branch: main
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - run: echo "🍏 This job's status is ${{ job.status }}."
+      - run: echo "⏹ End of job. Status: ${{ job.status }}."
