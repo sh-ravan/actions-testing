@@ -28,7 +28,7 @@ jobs:
 
     steps:
       - run: echo "⚡ This merge job was manually triggered by ${{ github.actor }}."
-      - run: echo "🐧 Running job on a ${{ runner.os }} server hosted by GitHub"
+      - run: echo "🐧 Running job on a ${{ runner.os }} server."
       - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
 
       - name: Check out repository code
