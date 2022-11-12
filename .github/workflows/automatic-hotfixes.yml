@@ -1,6 +1,9 @@
-name: MANUAL - Main to Staging
+name: AUTOMATIC - Hotfix PRs
 
 on:
+  pull_request:
+    types:
+      - closed
   workflow_dispatch:
 
 jobs:
@@ -8,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - run: echo "⚡ This merge job was manually triggered by ${{ github.actor }}."
+      - run: echo "⚡ This automerge job was triggered by a ${{ github.event_name }} event."
       - run: echo "🐧 Running job on a ${{ runner.os }} server."
       - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
 
@@ -18,11 +21,12 @@ jobs:
       - run: echo "⏬ The ${{ github.repository }} repository has been cloned to the runner."
       - run: echo "🚀 The workflow is now ready to start."
 
-      - name: merge main to staging
+      - name: merge to main
+        if: ${{ (github.event.pull_request.merged == true) && (contains(github.event.pull_request.labels.*.name, 'hotfix')) }}
         uses: tukasz/direct-merge-action@b7882b0c66df6376596a91f117272c1ba2d5f867
         with:
-          source-branch: main
-          target-branch: staging
+          source-branch: staging
+          target-branch: main
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - run: echo "⏹ End of job. Status - ${{ job.status }}."
