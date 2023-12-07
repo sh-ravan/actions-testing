@@ -1,0 +1,43 @@
+name: ">> PR"
+
+on:
+  workflow_dispatch:
+    inputs:
+      compare:
+        type: string
+        description: Compare Branch (Source)
+        required: true
+      base:
+        type: choice
+        description: Base Branch (Destination)
+        required: true
+        options:
+        - main
+        - staging
+        - pre-prod
+        - production
+        - ril-production
+
+jobs:
+  autopr:
+    runs-on: ubuntu-latest
+
+    steps:
+      - run: echo "⚡ This job was triggered by a ${{ github.event_name }} event."
+      - run: echo "🐧 Running job on a ${{ runner.os }} server."
+
+      - name: Check out repository code
+        uses: actions/checkout@v3
+
+      - run: echo "🐑 The ${{ github.repository }} repository has been cloned to the runner."
+      - run: echo "🚀 The workflow is now ready to start."
+
+      - name: Merge
+        uses: tretuna/sync-branches@1.4.0
+        with:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          FROM_BRANCH: "${{ github.event.inputs.compare }}"
+          TO_BRANCH: "${{ github.event.inputs.base }}"
+          PULL_REQUEST_TITLE: "chore: merge ${{ github.event.inputs.compare }} into ${{ github.event.inputs.base }}"
+
+      - run: echo "⏹ End of job. Status - ${{ job.status }}."
