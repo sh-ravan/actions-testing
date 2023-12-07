@@ -39,6 +39,6 @@ jobs:
           FROM_BRANCH: "${{ github.event.inputs.compare }}"
           TO_BRANCH: "${{ github.event.inputs.base }}"
           PULL_REQUEST_TITLE: "chore: merge ${{ github.event.inputs.compare }} into ${{ github.event.inputs.base }}"
-          PULL_REQUEST_BODY: "merge ${{ github.event.inputs.compare }} into ${{ github.event.inputs.base }}"
+          PULL_REQUEST_BODY: "${{ github.event.inputs.compare }} → ${{ github.event.inputs.base }}"
 
       - run: echo "⏹ End of job. Status - ${{ job.status }}."
