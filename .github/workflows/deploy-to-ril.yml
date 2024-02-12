@@ -1,0 +1,30 @@
+name: ">> Deploy to RIL"
+
+on:
+  workflow_dispatch:
+
+jobs:
+  autopr:
+    if: ${{ (github.actor == 'sh-ravan') || (github.actor == 'somasekharkakarla') || (github.actor == 'Anil-Pujeri') || (github.actor == 'saideeptalari') }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - run: echo "⚡ This job was triggered by a ${{ github.event_name }} event."
+      - run: echo "🐧 Running job on a ${{ runner.os }} server."
+
+      - name: Check out repository code
+        uses: actions/checkout@v3
+
+      - run: echo "🐑 The ${{ github.repository }} repository has been cloned to the runner."
+      - run: echo "🚀 The workflow is now ready to start."
+
+      - name: Merge
+        uses: tretuna/sync-branches@1.4.0
+        with:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          FROM_BRANCH: production
+          TO_BRANCH: ril-production
+          PULL_REQUEST_TITLE: "chore: merge production into ril-production"
+          PULL_REQUEST_BODY: "production → ril-production"
+
+      - run: echo "⏹ End of job. Status - ${{ job.status }}."

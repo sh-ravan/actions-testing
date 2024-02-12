@@ -1,0 +1,55 @@
+name: AUTOMATIC - Label PRs
+
+on: 
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  labeller:
+    runs-on: ubuntu-latest
+
+    steps:
+      - run: echo "⚡ This job was triggered by a ${{ github.event_name }} event."
+      - run: echo "🐧 Running job on a ${{ runner.os }} server."
+
+      - uses: actions/checkout@v3
+
+      - run: echo "🐑 The ${{ github.repository }} repository has been cloned to the runner."
+      - run: echo "🚀 The workflow is now ready to start."
+      
+      - name: Check if PR is of hotfix type
+        id: check
+        run: |
+          if [[ $GITHUB_HEAD_REF == hotfix* ]] && [[ $GITHUB_BASE_REF == pre-prod ]]; then
+            echo "hotfix=true" >> $GITHUB_OUTPUT
+          elif [[ $GITHUB_HEAD_REF == cherry* ]] && [[ $GITHUB_BASE_REF == pre-prod ]]; then
+            echo "cherry=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Add the hotfix label
+        if: steps.check.outputs.hotfix == 'true'  
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            github.rest.issues.addLabels({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              labels: ['hotfix']
+            })
+
+      - name: Add the cherry label
+        if: steps.check.outputs.cherry == 'true'  
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            github.rest.issues.addLabels({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              labels: ['cherry']
+            })
+
+      - run: echo "⏹ End of job. Status - ${{ job.status }}."

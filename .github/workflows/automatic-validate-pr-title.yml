@@ -1,0 +1,26 @@
+name: AUTOMATIC - Validate PR title
+
+on:
+  pull_request_target:
+    types:
+      - opened
+      - edited
+      - synchronize
+
+permissions:
+  pull-requests: read
+
+jobs:
+  main:
+    name: Validate PR title
+    runs-on: ubuntu-latest
+
+    steps:
+      - run: echo "⚡ This job was triggered by a ${{ github.event_name }} event."
+      - run: echo "🐧 Running job on a ${{ runner.os }} server."
+
+      - uses: amannn/action-semantic-pull-request@v5
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - run: echo "⏹ End of job. Status - ${{ job.status }}."

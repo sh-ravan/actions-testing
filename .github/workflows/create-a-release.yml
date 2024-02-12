@@ -1,25 +1,16 @@
-name: ">> PR"
+name: ">> Create a release"
 
 on:
   workflow_dispatch:
     inputs:
       compare:
         type: string
-        description: Compare Branch (Source)
+        description: Version number (without v prefix)
         required: true
-      base:
-        type: choice
-        description: Base Branch (Destination)
-        required: true
-        options:
-        - main
-        - staging
-        - pre-prod
-        - production
-        - ril-production
 
 jobs:
   autopr:
+    if: ${{ (github.actor == 'sh-ravan') || (github.actor == 'kdyadav') || (github.actor == 'Anil-Pujeri') || (github.actor == 'saideeptalari') }}
     runs-on: ubuntu-latest
 
     steps:
