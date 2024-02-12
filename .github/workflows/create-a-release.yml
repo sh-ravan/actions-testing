@@ -34,9 +34,9 @@ jobs:
         uses: tretuna/sync-branches@1.4.0
         with:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-          FROM_BRANCH: "${{ github.event.inputs.version }}"
+          FROM_BRANCH: "v${{ github.event.inputs.version }}"
           TO_BRANCH: "production"
-          PULL_REQUEST_TITLE: "chore: merge ${{ github.event.inputs.version }} into production"
-          PULL_REQUEST_BODY: "${{ github.event.inputs.version }} → production"
+          PULL_REQUEST_TITLE: "chore: merge v${{ github.event.inputs.version }} into production"
+          PULL_REQUEST_BODY: "v${{ github.event.inputs.version }} → production"
 
       - run: echo "⏹ End of job. Status - ${{ job.status }}."
