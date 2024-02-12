@@ -24,19 +24,19 @@ jobs:
         uses: tretuna/sync-branches@1.4.0
         with:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-          FROM_BRANCH: "pre-prod"
+          FROM_BRANCH: "${{ github.event.pull_request.base.ref }}"
           TO_BRANCH: "production"
-          PULL_REQUEST_TITLE: "chore: merge pre-prod into production"
-          PULL_REQUEST_BODY: This PR was automatically created because another PR with the label 'hotfix' was merged into branch 'pre-prod'. DO NOT SQUASH and merge this PR.
+          PULL_REQUEST_TITLE: "chore: merge ${{github.event.pull_request.base.ref}} into production"
+          PULL_REQUEST_BODY: This PR was automatically created because another PR with the label 'hotfix' was merged into branch '${{ github.event.pull_request.base.ref }}'. DO NOT SQUASH and merge this PR.
 
       - name: Merge into main (hotfix)
         if: ${{ (github.event.pull_request.merged == true) && (contains(github.event.pull_request.labels.*.name, 'hotfix')) }}
         uses: tretuna/sync-branches@1.4.0
         with:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-          FROM_BRANCH: "pre-prod"
+          FROM_BRANCH: "${{ github.event.pull_request.base.ref }}"
           TO_BRANCH: "main"
-          PULL_REQUEST_TITLE: "chore: merge pre-prod into main"
-          PULL_REQUEST_BODY: This PR was automatically created because another PR with the label 'hotfix' was merged into branch 'pre-prod'. DO NOT SQUASH and merge this PR.
+          PULL_REQUEST_TITLE: "chore: merge ${{github.event.pull_request.base.ref}} into main"
+          PULL_REQUEST_BODY: This PR was automatically created because another PR with the label 'hotfix' was merged into branch '${{ github.event.pull_request.base.ref }}'. DO NOT SQUASH and merge this PR.
 
       - run: echo "⏹ End of job. Status - ${{ job.status }}."
