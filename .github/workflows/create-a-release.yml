@@ -3,7 +3,7 @@ name: ">> Create a release"
 on:
   workflow_dispatch:
     inputs:
-      compare:
+      version:
         type: string
         description: Version number (without v prefix)
         required: true
@@ -23,13 +23,20 @@ jobs:
       - run: echo "🐑 The ${{ github.repository }} repository has been cloned to the runner."
       - run: echo "🚀 The workflow is now ready to start."
 
-      - name: Merge
+      - name: Create version branch
+        uses: peterjgrainger/action-create-branch@v2.2.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          branch: "v${{ github.event.inputs.version }}"
+
+      - name: Merge version branch into production
         uses: tretuna/sync-branches@1.4.0
         with:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-          FROM_BRANCH: "${{ github.event.inputs.compare }}"
-          TO_BRANCH: "${{ github.event.inputs.base }}"
-          PULL_REQUEST_TITLE: "chore: merge ${{ github.event.inputs.compare }} into ${{ github.event.inputs.base }}"
-          PULL_REQUEST_BODY: "${{ github.event.inputs.compare }} → ${{ github.event.inputs.base }}"
+          FROM_BRANCH: "${{ github.event.inputs.version }}"
+          TO_BRANCH: "production"
+          PULL_REQUEST_TITLE: "chore: merge ${{ github.event.inputs.version }} into production"
+          PULL_REQUEST_BODY: "${{ github.event.inputs.version }} → production"
 
       - run: echo "⏹ End of job. Status - ${{ job.status }}."
