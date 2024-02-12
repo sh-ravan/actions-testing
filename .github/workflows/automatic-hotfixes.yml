@@ -1,4 +1,4 @@
-name: AUTOMATIC - Hotfixes and Cherry-picks
+name: AUTOMATIC - Hotfixes
 
 on:
   pull_request:
@@ -29,16 +29,6 @@ jobs:
           PULL_REQUEST_TITLE: "chore: merge pre-prod into production"
           PULL_REQUEST_BODY: This PR was automatically created because another PR with the label 'hotfix' was merged into branch 'pre-prod'. DO NOT SQUASH and merge this PR.
 
-      - name: Merge into production (cherry)
-        if: ${{ (github.event.pull_request.merged == true) && (contains(github.event.pull_request.labels.*.name, 'cherry')) }}
-        uses: tretuna/sync-branches@1.4.0
-        with:
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-          FROM_BRANCH: "pre-prod"
-          TO_BRANCH: "production"
-          PULL_REQUEST_TITLE: "chore: merge pre-prod into production"
-          PULL_REQUEST_BODY: This PR was automatically created because another PR with the label 'cherry' was merged into branch 'pre-prod'. DO NOT SQUASH and merge this PR.
-
       - name: Merge into main (hotfix)
         if: ${{ (github.event.pull_request.merged == true) && (contains(github.event.pull_request.labels.*.name, 'hotfix')) }}
         uses: tretuna/sync-branches@1.4.0
@@ -48,15 +38,5 @@ jobs:
           TO_BRANCH: "main"
           PULL_REQUEST_TITLE: "chore: merge pre-prod into main"
           PULL_REQUEST_BODY: This PR was automatically created because another PR with the label 'hotfix' was merged into branch 'pre-prod'. DO NOT SQUASH and merge this PR.
-
-      - name: Merge into main (cherry)
-        if: ${{ (github.event.pull_request.merged == true) && (contains(github.event.pull_request.labels.*.name, 'cherry')) }}
-        uses: tretuna/sync-branches@1.4.0
-        with:
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-          FROM_BRANCH: "pre-prod"
-          TO_BRANCH: "main"
-          PULL_REQUEST_TITLE: "chore: merge pre-prod into main"
-          PULL_REQUEST_BODY: This PR was automatically created because another PR with the label 'cherry' was merged into branch 'pre-prod'. DO NOT SQUASH and merge this PR.
 
       - run: echo "⏹ End of job. Status - ${{ job.status }}."

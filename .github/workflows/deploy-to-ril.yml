@@ -5,7 +5,7 @@ on:
 
 jobs:
   autopr:
-    if: ${{ (github.actor == 'sh-ravan') || (github.actor == 'somasekharkakarla') || (github.actor == 'Anil-Pujeri') || (github.actor == 'saideeptalari') }}
+    if: ${{ (github.actor == 'somasekharkakarla') || (github.actor == 'Anil-Pujeri') || (github.actor == 'saideeptalari') || (github.actor == 'sh-ravan') }}
     runs-on: ubuntu-latest
 
     steps:
